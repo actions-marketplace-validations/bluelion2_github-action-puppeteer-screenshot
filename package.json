@@ -1,0 +1,16 @@
+{
+  "name": "github-action-puppeteer-screenshot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/bluelion2/github-action-puppeteer-screenshot.git",
+  "author": "강승훈 <iltk2000@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.8.0",
+    "axios": "^0.24.0",
+    "puppeteer": "^15.1.1"
+  },
+  "scripts": {
+    "build": "rm -rf dist && npx ncc build index.js"
+  }
+}
