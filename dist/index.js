@@ -41166,8 +41166,7 @@ try {
  
   })()
 } catch (error) {
-  console.log('error', error)
-  throw new Error("screenshot failed")
+  core.setFailed(error.message);
 }
 })();
 
