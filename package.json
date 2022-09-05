@@ -11,6 +11,6 @@
     "puppeteer": "^15.1.1"
   },
   "scripts": {
-    "build": "rm -rf dist && npx ncc build index.js"
+    "build": "rm -rf dist && npx @vercel/ncc build index.js"
   }
 }
