@@ -14,7 +14,7 @@ try {
       const page = await browser.newPage();
       const path = `${imgName}.${imgType}`;
 
-      await page.goto(`file://${__dirname}/${target}`);
+      await page.goto(`file://${process.cwd()}/${target}`);
       await page.waitForTimeout(1000);
       await page.screenshot({
         fullPage: true,
