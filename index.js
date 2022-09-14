@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const { WebClient } = require('@slack/web-api');
 const fs = require('fs');
 
