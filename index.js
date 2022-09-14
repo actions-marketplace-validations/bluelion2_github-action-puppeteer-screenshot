@@ -9,16 +9,16 @@ try {
     const slack_token = core.getInput('slack-token') || null;
     const channels = core.getInput('slack-channels') || null;
     const title = core.getInput('img-name') || 'test';
+    const filePath = `file://${process.cwd()}${target}`;
+    console.log('filePath', filePath);
 
     if (target && slack_token && channels) {
       const web = new WebClient(slack_token);
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
       const savePath = `${title}.jpeg`;
-      const filePath = `file://${process.cwd()}${target}`;
-      console.log('filePath', filePath);
 
-      await page.goto(filePath);
+      await page.goto();
       await page.waitForTimeout(1000);
       await page.screenshot({
         fullPage: true,
