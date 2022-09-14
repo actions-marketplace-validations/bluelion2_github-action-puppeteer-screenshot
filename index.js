@@ -5,7 +5,7 @@ const fs = require('fs');
 
 try {
   (async () => {
-    const target = core.getInput('target-file') || '/';
+    const target = core.getInput('target-file') || null;
     const slack_token = core.getInput('slack-token') || null;
     const channels = core.getInput('slack-channels') || null;
     const title = core.getInput('img-name') || 'test';
@@ -16,7 +16,7 @@ try {
       const page = await browser.newPage();
       const savePath = `${title}.jpeg`;
 
-      await page.goto(`file://${process.cwd()}/index.html`);
+      await page.goto(`file://${process.cwd()}${target}`);
       await page.waitForTimeout(1000);
       await page.screenshot({
         fullPage: true,
