@@ -15,8 +15,10 @@ try {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
       const savePath = `${title}.jpeg`;
+      const filePath = `file://${process.cwd()}${target}`;
+      console.log('filePath', filePath);
 
-      await page.goto(`file://${process.cwd()}${target}`);
+      await page.goto(filePath);
       await page.waitForTimeout(1000);
       await page.screenshot({
         fullPage: true,
