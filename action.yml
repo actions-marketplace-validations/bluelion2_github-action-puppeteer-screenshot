@@ -1,22 +1,19 @@
 name: puppeteer screenshot to slack
 description: 'puppeteer를 통해 만든 jpeg를 slack으로 보내는 action'
 inputs:
-  target-file: 
+  target-file:
     description: 'target file - Ex) /mochawesome-report/mochawesome.html'
     required: true
   slack-token:
     description: 'slack auth token'
     required: true
-  slack-channels: 
+  slack-channels:
     description: 'target slack channel id'
     required: true
   img-name:
     description: 'img file name - default: test'
     required: false
-  img-type:
-    description: 'img file type - default: jpeg'
-    required: false
-runs: 
+runs:
   using: 'node16'
   main: 'dist/index.js'
 branding:
