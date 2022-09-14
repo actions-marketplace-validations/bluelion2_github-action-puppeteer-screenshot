@@ -50573,75 +50573,39 @@ const fs = __nccwpck_require__(7147);
 
 try {
   (async () => {
-    const target = core.getInput('target-file') || '/index.html';
-    const slack_token =
-      core.getInput('slack-token') ||
-      'xoxp-366190432502-725008683671-4078730998738-b342812f3b9f3fb528a128151b0ebd9a';
-    const channels = core.getInput('slack-channels') || 'DM948GFS4';
+    const target = core.getInput('target-file') || '/';
+    const slack_token = core.getInput('slack-token') || null;
+    const channels = core.getInput('slack-channels') || null;
     const title = core.getInput('img-name') || 'test';
 
     if (target && slack_token && channels) {
       const web = new WebClient(slack_token);
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({
+        headless: true,
+      });
       const page = await browser.newPage();
       const savePath = `${title}.jpeg`;
-      const a = puppeteer.executablePath();
-      console.log('aa', a);
 
-      // await page.goto(`file://${process.cwd()}/index.html`);
-      // await page.waitForTimeout(1000);
-      // await page.screenshot({
-      //   fullPage: true,
-      //   path: savePath,
-      // });
+      await page.goto(`file://${process.cwd()}/index.html`);
+      await page.waitForTimeout(1000);
+      await page.screenshot({
+        fullPage: true,
+        path: savePath,
+      });
 
-      // try {
-      //   await web.files.upload({
-      //     channels,
-      //     title,
-      //     file: fs.createReadStream(savePath),
-      //   });
-
-      //   await browser.close();
-      // } catch (error) {
-      //   console.log('error', error);
-      //   core.setFailed(error.message);
-      // }
+      try {
+        await web.files.upload({
+          channels,
+          title,
+          file: fs.createReadStream(savePath),
+        });
+      } catch (error) {
+        console.log('slack error', error);
+        core.setFailed(error.message);
+      } finally {
+        await browser.close();
+      }
     }
-
-    // const target = core.getInput('target-file') || '/index.html';
-    // const slack_token =
-    //   core.getInput('slack-token') ||
-    //   'xoxp-366190432502-725008683671-4078730998738-b342812f3b9f3fb528a128151b0ebd9a';
-    // const channels = core.getInput('slack-channels') || 'DM948GFS4';
-    // const title = core.getInput('img-name') || 'test';
-    // if (target && slack_token && channels) {
-    //   const web = new WebClient(slack_token);
-    //   const browser = await puppeteer.launch({
-    //     headless: true,
-    //   });
-    //   const page = await browser.newPage();
-    //   const savePath = `${title}.jpeg`;
-    //   console.log('browser', browser);
-    //   await page.goto(`file://${process.cwd()}/index.html`);
-    //   await page.waitForTimeout(1000);
-    //   await page.screenshot({
-    //     fullPage: true,
-    //     path: savePath,
-    //   });
-    //   try {
-    //     await web.files.upload({
-    //       channels,
-    //       title,
-    //       file: fs.createReadStream(savePath),
-    //     });
-    //   } catch (error) {
-    //     console.log('error', error);
-    //     core.setFailed(error.message);
-    //   } finally {
-    //     await browser.close();
-    //   }
-    // }
   })();
 } catch (error) {
   console.log('error', error);
