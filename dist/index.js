@@ -50582,10 +50582,9 @@ try {
 
     if (target && slack_token && channels) {
       const web = new WebClient(slack_token);
-      const executablePath = puppeteer.executablePath();
+
       const browser = await puppeteer.launch({
         headless: true,
-        executablePath,
       });
       const page = await browser.newPage();
       const savePath = `${title}.jpeg`;
