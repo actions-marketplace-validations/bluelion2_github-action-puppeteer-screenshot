@@ -1,40 +1,43 @@
 const core = require('@actions/core');
 const puppeteer = require('puppeteer');
+const { WebClient } = require('@slack/web-api');
+const fs = require('fs');
 
 try {
   (async () => {
-    const target = core.getInput('target-file');
-    const slack_token = core.getInput('slack-token');
-    const channels = core.getInput('slack-channels');
-    const imgName = core.getInput('img-name') || 'test';
-    const imgType = core.getInput('img-type') || 'jpeg';
+    const target = core.getInput('target-file') || '/';
+    const slack_token = core.getInput('slack-token') || null;
+    const channels = core.getInput('slack-channels') || null;
+    const title = core.getInput('img-name') || 'test';
 
     if (target && slack_token && channels) {
+      const web = new WebClient(slack_token);
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
-      const path = `${imgName}.${imgType}`;
+      const savePath = `${title}.jpeg`;
 
-      await page.goto(`file://${process.cwd()}/${target}`);
+      await page.goto(`file://${process.cwd()}/index.html`);
       await page.waitForTimeout(1000);
       await page.screenshot({
         fullPage: true,
-        path,
-      });
-      const Axios = axios.create({
-        baseURL: 'https://slack.com/api',
-        headers: {
-          Authorization: `Bearer ${slack_token}`,
-        },
+        path: savePath,
       });
 
-      await Axios.post('/files.upload', {
-        channels,
-        file: fs.createReadStream(path),
-      });
+      try {
+        await web.files.upload({
+          channels,
+          title,
+          file: fs.createReadStream(savePath),
+        });
 
-      await browser.close();
+        await browser.close();
+      } catch (error) {
+        console.log('error', error);
+        core.setFailed(error.message);
+      }
     }
   })();
 } catch (error) {
+  console.log('error', error);
   core.setFailed(error.message);
 }

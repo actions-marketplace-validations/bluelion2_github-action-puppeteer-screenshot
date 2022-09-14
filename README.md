@@ -12,4 +12,3 @@ Puppeteer를 통해 특정 이미지를 열어서 스크린샷 찍어, slack으�
 |  slack-token   |  true   | slack api token - file upload 권한이 있어야 함 |
 | slack-channels |  true   |                                                |
 |    img-name    |  false  | 결과물 이름 : Default - test                   |
-|    img-type    |  false  | 결과물 타입 : Default - jpeg                   |
