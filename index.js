@@ -9,7 +9,7 @@ try {
     // SLACK
     const slack_token =
       core.getInput('slack-token') ||
-      'xoxp-366190432502-725008683671-4080987952628-1638edc6608fd9ed0dfeeced2f0c56ea';
+      'xoxp-366190432502-725008683671-4091261382929-9f415ef7d71e57f0238a3c576fe36dd5';
     const channels = core.getInput('slack-channels') || 'DM948GFS4';
     const title = core.getInput('img-name') || 'test';
     const filePath = `file://${process.cwd()}${target}`;
