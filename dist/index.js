@@ -49612,11 +49612,13 @@ try {
 
     if (target && slack_token && channels) {
       const web = new WebClient(slack_token);
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({
+        headless: false,
+        args: ['--no-sandbox', '--disabled-setuid-sandbox'],
+      });
       const page = await browser.newPage();
       const savePath = `${title}.jpeg`;
-
-      await page.goto();
+      await page.goto(filePath);
       await page.waitForTimeout(1000);
       await page.screenshot({
         fullPage: true,
