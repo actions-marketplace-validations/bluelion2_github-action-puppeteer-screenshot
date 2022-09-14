@@ -50570,7 +50570,6 @@ const core = __nccwpck_require__(2614);
 const puppeteer = __nccwpck_require__(1912);
 const { WebClient } = __nccwpck_require__(8486);
 const fs = __nccwpck_require__(7147);
-const path = __nccwpck_require__(1017);
 
 try {
   (async () => {

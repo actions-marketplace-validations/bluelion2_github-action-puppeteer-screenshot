@@ -2,7 +2,6 @@ const core = require('@actions/core');
 const puppeteer = require('puppeteer');
 const { WebClient } = require('@slack/web-api');
 const fs = require('fs');
-const path = require('path');
 
 try {
   (async () => {
