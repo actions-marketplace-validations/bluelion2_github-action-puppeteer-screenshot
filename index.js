@@ -14,11 +14,8 @@ try {
 
     if (target && slack_token && channels) {
       const web = new WebClient(slack_token);
-      const executablePath = puppeteer.executablePath();
       console.log('puppeteer', puppeteer);
       const browser = await puppeteer.launch({
-        headless: false,
-        executablePath,
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
