@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const { WebClient } = require('@slack/web-api');
 const fs = require('fs');
 
@@ -17,7 +17,6 @@ try {
       const executablePath = puppeteer.executablePath();
       const browser = await puppeteer.launch({
         headless: false,
-        executablePath,
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
