@@ -1,22 +1,28 @@
-name: puppeteer screenshot to slack
-description: 'puppeteer를 통해 만든 jpeg를 slack으로 보내는 action'
+name: Send File base64
+description: '지정된 경로에 있는 파일을 base64로 변환해서 보내주는 액션입니다.'
 inputs:
-  target-file: 
+  target-file-path:
     description: 'target file - Ex) /mochawesome-report/mochawesome.html'
     required: true
   slack-token:
     description: 'slack auth token'
     required: true
-  slack-channels: 
+  slack-channels:
     description: 'target slack channel id'
     required: true
+  send-url:
+    description: 'axios send url'
+    required: true
+  file-type:
+    description: 'github action으로 보내는 파일 확장자 - default: html'
+    required: false
   img-name:
-    description: 'img file name - default: test'
+    description: 'response img file name - default: test'
     required: false
   img-type:
-    description: 'img file type - default: jpeg'
+    description: 'response img file type - default: jpeg'
     required: false
-runs: 
+runs:
   using: 'node16'
   main: 'dist/index.js'
 branding:
