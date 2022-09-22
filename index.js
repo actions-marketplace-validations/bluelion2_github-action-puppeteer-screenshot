@@ -5,12 +5,10 @@ const axios = require('axios');
 try {
   (async () => {
     const target = core.getInput('target-file-path');
-    const sendUrl =
-      core.getInput('send-url') ||
-      'https://automation-mathflat.vercel.app/api/cypress/postReport';
+    const sendUrl = core.getInput('send-url');
     const fileType = core.getInput('file-type') || 'html';
 
-    if (!slack_token || !sendUrl || !target) {
+    if (!sendUrl || !target) {
       core.setFailed('필수값이 빠졌습니다. 확인해주세요.');
       return;
     }
