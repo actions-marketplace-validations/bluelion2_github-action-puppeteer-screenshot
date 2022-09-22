@@ -1,45 +1,34 @@
 const core = require('@actions/core');
-const puppeteer = require('puppeteer');
-const { WebClient } = require('@slack/web-api');
 const fs = require('fs');
+const axios = require('axios');
 
 try {
   (async () => {
-    const target = core.getInput('target-file') || '/';
-    const slack_token = core.getInput('slack-token') || null;
-    const channels = core.getInput('slack-channels') || null;
-    const title = core.getInput('img-name') || 'test';
+    const target = core.getInput('target-file-path');
+    const sendUrl =
+      core.getInput('send-url') ||
+      'https://automation-mathflat.vercel.app/api/cypress/postReport';
+    const fileType = core.getInput('file-type') || 'html';
 
-    if (target && slack_token && channels) {
-      const web = new WebClient(slack_token);
-      const browser = await puppeteer.launch({
-        headless: true,
+    if (!slack_token || !sendUrl || !target) {
+      core.setFailed('필수값이 빠졌습니다. 확인해주세요.');
+      return;
+    }
+
+    const encodedData = `data:${fileType};base64,${fs.readFileSync(target, {
+      encoding: 'base64',
+    })}`;
+
+    try {
+      axios.post(sendUrl, {
+        encodedData,
+        fileType,
       });
-      const page = await browser.newPage();
-      const savePath = `${title}.jpeg`;
-
-      await page.goto(`file://${process.cwd()}/index.html`);
-      await page.waitForTimeout(1000);
-      await page.screenshot({
-        fullPage: true,
-        path: savePath,
-      });
-
-      try {
-        await web.files.upload({
-          channels,
-          title,
-          file: fs.createReadStream(savePath),
-        });
-      } catch (error) {
-        console.log('slack error', error);
-        core.setFailed(error.message);
-      } finally {
-        await browser.close();
-      }
+    } catch (error) {
+      console.log('error', error);
+      core.setFailed(error.message);
     }
   })();
 } catch (error) {
-  console.log('error', error);
   core.setFailed(error.message);
 }

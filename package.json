@@ -1,5 +1,5 @@
 {
-  "name": "github-action-puppeteer-screenshot",
+  "name": "github-action-send-base64",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/bluelion2/github-action-puppeteer-screenshot.git",
@@ -7,8 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.8.0",
-    "@slack/web-api": "^6.7.2",
-    "puppeteer": "^17.1.3"
+    "axios": "^0.27.2"
   },
   "scripts": {
     "build": "rm -rf dist && npx @vercel/ncc build index.js"
