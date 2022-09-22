@@ -4,23 +4,11 @@ inputs:
   target-file-path:
     description: 'target file - Ex) /mochawesome-report/mochawesome.html'
     required: true
-  slack-token:
-    description: 'slack auth token'
-    required: true
-  slack-channels:
-    description: 'target slack channel id'
-    required: true
   send-url:
-    description: 'axios send url'
+    description: '변환된 결과물을 받을 url'
     required: true
   file-type:
     description: 'github action으로 보내는 파일 확장자 - default: html'
-    required: false
-  img-name:
-    description: 'response img file name - default: test'
-    required: false
-  img-type:
-    description: 'response img file type - default: jpeg'
     required: false
 runs:
   using: 'node16'
