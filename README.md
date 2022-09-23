@@ -17,3 +17,8 @@ puppeteer를 통해 파일을 캡쳐한 뒤 slack으로 보내는 액션입니�
 |     img-type     |  false  | img 타입 : Default - jpeg |
 
 ---
+
+## Slack Token
+
+- Slack Token에는 `file.write` 할 수 있는 권한이 필요함.
+  - [참고](https://api.slack.com/methods/files.upload)
