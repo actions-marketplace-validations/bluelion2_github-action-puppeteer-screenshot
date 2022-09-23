@@ -7,7 +7,9 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.8.0",
-    "axios": "^0.27.2"
+    "@slack/web-api": "^6.7.2",
+    "axios": "^0.27.2",
+    "puppeteer-core": "^18.0.5"
   },
   "scripts": {
     "build": "rm -rf dist && npx @vercel/ncc build index.js"
