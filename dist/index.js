@@ -7815,6 +7815,7 @@ try {
     }
 
     const path = `file://${process.cwd()}${target}`;
+    console.log('path', path);
 
     const encodedData = `data:${fileType};base64,${fs.readFileSync(path, {
       encoding: 'base64',
