@@ -56,13 +56,9 @@ try {
       });
       const page = await browser.newPage();
       const savePath = `${title}.${fileType}`;
+      const openUrl = `${`file://${process.cwd()}`}${targetPath}`;
 
-      await page.goto(
-        `${
-          process.env.GITHUB_WORKSPACE || `file://${process.cwd()}`
-        }${targetPath}`
-      );
-      // await page.goto(`file://${process.cwd()}${targetPath}`);
+      await page.goto(openUrl);
       setTimeout(async () => {
         await page.screenshot({
           fullPage: true,
