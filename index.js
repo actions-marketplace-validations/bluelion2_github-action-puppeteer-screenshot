@@ -9,7 +9,7 @@ const path = require('path');
 function getChromePath() {
   let browserPath;
 
-  const type = os.type;
+  const type = os.type();
   switch (type) {
     case 'Windows_NT': {
       const programFiles =
@@ -22,13 +22,14 @@ function getChromePath() {
       );
       break;
     }
-    case 'Linux': {
-      browserPath = '/usr/bin/google-chrome';
-      break;
-    }
     case 'Darwin': {
       browserPath =
         '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+      break;
+    }
+    case 'Linux':
+    default: {
+      browserPath = '/usr/bin/google-chrome';
       break;
     }
   }
@@ -37,7 +38,7 @@ function getChromePath() {
     return path.normalize(browserPath);
   }
 
-  throw new TypeError(`Cannot run action. ${os.type} is not supported.`);
+  throw new TypeError(`Cannot run action. ${type} is not supported.`);
 }
 
 try {

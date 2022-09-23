@@ -1,5 +1,5 @@
-name: Send File base64
-description: '지정된 경로에 있는 파일을 base64로 변환해서 보내주는 액션입니다.'
+name: Puppeteer Screenshot file
+description: '지정된 경로에 있는 파일을 스크린샷을 찍어 보내주는 액션입니다.'
 inputs:
   target-file-path:
     description: 'target file - Ex) /mochawesome-report/mochawesome.html'
