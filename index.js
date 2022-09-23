@@ -14,7 +14,6 @@ try {
     }
 
     const path = `${process.cwd()}${target}`;
-    console.log('path', path);
 
     const encodedData = `data:${fileType};base64,${fs.readFileSync(path, {
       encoding: 'base64',
@@ -22,6 +21,9 @@ try {
 
     try {
       axios.post(sendUrl, {
+        headers: {
+          'Content-Type': 'Application/x-www-form-urlencoded',
+        },
         encodedData,
         fileType,
       });
