@@ -72,8 +72,7 @@ try {
             file: fs.createReadStream(savePath),
           });
         } catch (error) {
-          console.log('error', error);
-          core.setFailed(error.message);
+          core.setFailed(`Slack Error! - ${error.message}`);
         } finally {
           await browser.close();
         }
@@ -81,6 +80,5 @@ try {
     }
   })();
 } catch (error) {
-  console.log('error', error);
-  core.setFailed(error.message);
+  core.setFailed(`Github Actions Error! - ${error.message}`);
 }
